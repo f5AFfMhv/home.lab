@@ -1,0 +1,3 @@
+---
+- name: Include play for common tasks
+  ansible.builtin.import_playbook: common.yml

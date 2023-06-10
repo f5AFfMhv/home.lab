@@ -1,0 +1,15 @@
+---
+gpg_keys:
+
+apt_repositories:
+
+packages:
+  - vim
+  - curl
+  - git
+  - wget
+  - htop
+  - apt-transport-https
+  - ca-certificates
+  - bash-completion
+  - python3-pip
