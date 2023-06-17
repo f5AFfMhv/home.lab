@@ -20,7 +20,7 @@ qm set $VM_ID --serial0 socket --vga serial0
 qm set $VM_ID --agent enabled=1 #optional but recommended
 qm template $VM_ID
 ```
-Export env variables with authentification information to proxmox\
+Export env variables with authentification information to proxmox
 ```bash
 export PM_USER=terraform-prov@pve
 export PM_PASS=<PASSWORD>
@@ -59,3 +59,8 @@ qemu-nbd --disconnect /dev/nbd0
 ### k3s_provision.yml
 
 Provisions new [K3S](https://k3s.io/) kubernetes cluster. It uses k3s quickstart script. For more information read official [documetation](https://docs.k3s.io/). Playbook is tested on debian 12 (bookworm) but should work with no or minimal modifications on other debian versions and debian based distros.
+
+```bash
+cd ansible
+ansible-playbook playbooks/k3s_provision.yml
+```
