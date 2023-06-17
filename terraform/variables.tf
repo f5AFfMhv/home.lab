@@ -14,7 +14,7 @@ variable "template_name" {
 }
 
 variable "vm_count" {
-  default     = 1
+  default     = 3
   description = "Number of VMs to create"
 }
 
@@ -24,7 +24,7 @@ variable "vm_name" {
 }
 
 variable "vm_cpu" {
-  default     = 2
+  default     = [2, 2, 2]
   description = "VM cpu cores"
 }
 
@@ -34,12 +34,12 @@ variable "vm_storage" {
 }
 
 variable "vm_disk" {
-  default     = "10G"
+  default     = ["10G", "10G", "10G"]
   description = "VM disk size"
 }
 
 variable "vm_memory" {
-  default     = 2048
+  default     = [2048, 2048, 2048]
   description = "VM memory in MB"
 }
 

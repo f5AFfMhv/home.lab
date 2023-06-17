@@ -48,8 +48,14 @@ chroot /mnt
 wget http://ftp.debian.org/debian/pool/main/q/qemu/qemu-guest-agent_8.0+dfsg-4_amd64.deb
 dpkg -i qemu-guest-agent_8.0+dfsg-4_amd64.deb
 
-umount /mnt/ubuntu/proc
+umount /mnt/proc
 sync
 umount /mnt
 qemu-nbd --disconnect /dev/nbd0
 ```
+
+## Ansible playbooks
+
+### k3s_provision.yml
+
+Provisions new [K3S](https://k3s.io/) kubernetes cluster. It uses k3s quickstart script. For more information read official [documetation](https://docs.k3s.io/). Playbook is tested on debian 12 (bookworm) but should work with no or minimal modifications on other debian versions and debian based distros.

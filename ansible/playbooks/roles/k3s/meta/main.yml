@@ -1,0 +1,19 @@
+galaxy_info:
+  author: Martynas J.
+  description: Provision K3S kubernetes cluster
+
+  issue_tracker_url: https://github.com/f5AFfMhv/home.lab/issues
+
+  license: GPL-2.0-or-later
+
+  min_ansible_version: 2.1
+
+  platforms:
+  - name: Debian
+    versions:
+    - bookworm
+    - bullseye
+
+  galaxy_tags: []
+
+dependencies: []

@@ -3,8 +3,8 @@ resource "proxmox_vm_qemu" "vm" {
   target_node = var.pve_node
   name      = "${var.vm_name[count.index]}"
   os_type   = "cloud-init"
-  memory    = var.vm_memory
-  cores     = var.vm_cpu
+  memory    = "${var.vm_memory[count.index]}"
+  cores     = "${var.vm_cpu[count.index]}"
   sockets   = 1
   clone     = var.template_name
   agent     = 1
@@ -17,7 +17,7 @@ resource "proxmox_vm_qemu" "vm" {
 
   disk {
     storage = var.vm_storage
-    size    = var.vm_disk
+    size    = "${var.vm_disk[count.index]}"
     type    = "scsi"
   }
 

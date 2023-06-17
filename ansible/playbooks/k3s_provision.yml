@@ -1,3 +1,7 @@
 ---
-- name: Include play for common tasks
-  ansible.builtin.import_playbook: common.yml
+- name: Provision K3S kubernetes cluster
+  gather_facts: true
+  hosts: k3s
+  roles:
+    - common
+    - k3s

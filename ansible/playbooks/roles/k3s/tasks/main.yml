@@ -1,0 +1,53 @@
+---
+# tasks file for k3s
+- name: Download installation script
+  ansible.builtin.get_url:
+    url: "https://get.k3s.io"
+    dest: "/root/k3s.sh"
+    mode: "0760"
+    owner: root
+    group: root
+
+- name: Initialize kubernetes cluster
+  when: inventory_hostname == groups.k3s_cp[0]
+  run_once: true
+  block:
+    - name: Run installation script
+      ansible.builtin.command:
+        cmd: "/root/k3s.sh"
+      changed_when: k3s_output.rc == 0
+      register: k3s_output
+
+    - name: Show script output
+      ansible.builtin.debug:
+        msg: "{{ k3s_output.stdout_lines + k3s_output.stderr_lines }}"
+
+    - name: Read node token file
+      ansible.builtin.command:
+        cmd: cat /var/lib/rancher/k3s/server/node-token
+      changed_when: token.rc != 0
+      register: token
+
+    - name: Set token fact
+      ansible.builtin.set_fact:
+        cluster_join_token: "{{ token.stdout }}"
+
+    - name: Set cp name fact
+      ansible.builtin.set_fact:
+        cp_name: "{{ inventory_hostname }}"
+
+- name: Join workers to cluster
+  when: "'k3s_worker' in group_names"
+  block:
+    - name: Join worker to cluster
+      ansible.builtin.command:
+        cmd: "/root/k3s.sh"
+      changed_when: k3s_output.rc == 0
+      register: k3s_output
+      environment:
+        K3S_URL: https://{{ cp_name }}:6443
+        K3S_TOKEN: "{{ cluster_join_token }}"
+
+    - name: Show script output
+      ansible.builtin.debug:
+        msg: "{{ k3s_output.stdout_lines + k3s_output.stderr_lines }}"
