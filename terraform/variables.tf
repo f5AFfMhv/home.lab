@@ -14,17 +14,17 @@ variable "template_name" {
 }
 
 variable "vm_count" {
-  default     = 3
+  default     = 4
   description = "Number of VMs to create"
 }
 
 variable "vm_name" {
-  default     = ["k3s-cp", "k3s-w1", "k3s-w2"]
+  default     = ["k3s-cp", "k3s-w1", "k3s-w2", "k3s-w3"]
   description = "VM name"
 }
 
 variable "vm_cpu" {
-  default     = [2, 2, 2]
+  default     = [2, 2, 2, 2]
   description = "VM cpu cores"
 }
 
@@ -34,17 +34,17 @@ variable "vm_storage" {
 }
 
 variable "vm_disk" {
-  default     = ["10G", "10G", "10G"]
+  default     = ["10G", "10G", "10G", "10G"]
   description = "VM disk size"
 }
 
 variable "vm_memory" {
-  default     = [2048, 2048, 2048]
+  default     = [2048, 2048, 2048, 2048]
   description = "VM memory in MB"
 }
 
 variable "vm_ip_addresses" {
-  default     = ["192.168.1.30", "192.168.1.31", "192.168.1.32"]
+  default     = ["192.168.1.30", "192.168.1.31", "192.168.1.32", "192.168.1.33"]
   description = "VM ip address"
 }
 
