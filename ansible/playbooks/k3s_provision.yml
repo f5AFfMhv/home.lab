@@ -1,4 +1,11 @@
 ---
+- name: Provision NFS server
+  gather_facts: true
+  hosts: nfs
+  roles:
+    - nfs
+  tags: nfs
+
 - name: Provision K3S kubernetes cluster
   gather_facts: true
   hosts: k3s
@@ -7,9 +14,18 @@
     - k3s
   tags: k3s
   tasks:
-    - name: Test cluster and download configuration
+    - name: Finnishing tasks for cp
       when: inventory_hostname == groups.k3s_cp[0]
       block:
+
+        - name: Deploy nfs storage class provisioner
+          ansible.builtin.template:
+            src: templates/nfs-storage-class.yml.j2
+            dest: /var/lib/rancher/k3s/server/manifests/nfs-storage.yaml
+            owner: root
+            group: root
+            mode: "0600"
+          tags: nfs-storage
 
         - name: Download cluster kubeconfig from cp node
           ansible.builtin.fetch:
@@ -29,10 +45,3 @@
           ansible.builtin.debug:
             msg: "{{ test.stdout_lines }}"
           tags: test_cluster
-
-- name: Provision NFS server
-  gather_facts: true
-  hosts: nfs
-  roles:
-    - nfs
-  tags: nfs
