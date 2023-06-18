@@ -1,0 +1,36 @@
+---
+# tasks file for nfs
+- name: Install NFS server
+  ansible.builtin.apt:
+    name: nfs-kernel-server
+    state: present
+
+- name: Create nfs user
+  ansible.builtin.user:
+    name: nfs
+    state: present
+    create_home: false
+    shell: /bin/false
+
+- name: Create NFS dir
+  ansible.builtin.file:
+    path: "{{ nfs_path }}"
+    state: directory
+    recurse: true
+    owner: nfs
+    group: nfs
+    mode: "1777"
+
+- name: Add NFS export
+  ansible.builtin.copy:
+    content: "{{ nfs_path }}/ *(rw,sync,no_root_squash,no_root_squash,subtree_check)"
+    dest: /etc/exports
+    owner: root
+    group: root
+    mode: "0640"
+
+- name: Update exports
+  ansible.builtin.command:
+    cmd: exportfs -ra
+  register: nfs_export
+  changed_when: nfs_export.rc == 0
