@@ -5,3 +5,34 @@
   roles:
     - common
     - k3s
+  tags: k3s
+  tasks:
+    - name: Test cluster and download configuration
+      when: inventory_hostname == groups.k3s_cp[0]
+      block:
+
+        - name: Download cluster kubeconfig from cp node
+          ansible.builtin.fetch:
+            src: /etc/rancher/k3s/k3s.yaml
+            dest: ~/.kube/k3s.yaml
+            flat: true
+          tags: download_config
+
+        - name: Get cluster status
+          ansible.builtin.command:
+            cmd: kubectl get nodes
+          changed_when: test.rc != 0
+          register: test
+          tags: test_cluster
+
+        - name: Show cluster status
+          ansible.builtin.debug:
+            msg: "{{ test.stdout_lines }}"
+          tags: test_cluster
+
+- name: Provision NFS server
+  gather_facts: true
+  hosts: nfs
+  roles:
+    - nfs
+  tags: nfs

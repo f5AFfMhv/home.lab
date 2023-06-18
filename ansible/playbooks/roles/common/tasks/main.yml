@@ -37,6 +37,9 @@
   ansible.builtin.get_url:
     url: "{{ item.url }}"
     dest: "/root/{{ item.name }}"
+    owner: root
+    group: root
+    mode: "0770"
   with_items: "{{ resources }}"
 
 - name: Install downloaded packages

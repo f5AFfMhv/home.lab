@@ -25,16 +25,16 @@
     - name: Read node token file
       ansible.builtin.command:
         cmd: cat /var/lib/rancher/k3s/server/node-token
-      changed_when: token.rc != 0
-      register: token
+      changed_when: k3s_token.rc != 0
+      register: k3s_token
 
     - name: Set token fact
       ansible.builtin.set_fact:
-        cluster_join_token: "{{ token.stdout }}"
+        k3s_cluster_join_token: "{{ k3s_token.stdout }}"
 
     - name: Set cp name fact
       ansible.builtin.set_fact:
-        cp_name: "{{ inventory_hostname }}"
+        k3s_cp_name: "{{ inventory_hostname }}"
 
 - name: Join workers to cluster
   when: "'k3s_worker' in group_names"
@@ -45,8 +45,8 @@
       changed_when: k3s_output.rc == 0
       register: k3s_output
       environment:
-        K3S_URL: https://{{ cp_name }}:6443
-        K3S_TOKEN: "{{ cluster_join_token }}"
+        K3S_URL: https://{{ k3s_cp_name }}:6443
+        K3S_TOKEN: "{{ k3s_cluster_join_token }}"
 
     - name: Show script output
       ansible.builtin.debug:
