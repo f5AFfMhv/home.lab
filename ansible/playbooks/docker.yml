@@ -1,0 +1,47 @@
+- name: Provision host to run docker containers
+  gather_facts: true
+  hosts: docker
+  vars:
+    compose_dir: /opt/docker-compose
+    compose_files:
+      - portainer-compose.yaml
+  roles:
+    - common
+  tasks:
+    - name: Install docker
+      ansible.builtin.apt:
+        name:
+          - docker-ce
+          - docker-compose-plugin
+        state: present
+
+    - name: Start docker service
+      ansible.builtin.service:
+        name: docker
+        state: started
+        enabled: true
+
+    - name: Create directory for compose files
+      ansible.builtin.file:
+        name: "{{ compose_dir }}"
+        state: directory
+        owner: root
+        group: root
+        mode: "0770"
+
+    - name: Copy compose files
+      ansible.builtin.copy:
+        src: "../../docker/{{ item }}"
+        dest: "{{ compose_dir }}/{{ item }}"
+        owner: root
+        group: root
+        mode: "0660"
+      with_items: "{{ compose_files }}"
+      tags: docker
+
+    - name: Apply compose files
+      ansible.builtin.command:
+        cmd: "docker compose -f {{ item }} up -d"
+        chdir: "{{ compose_dir }}"
+      with_items: "{{ compose_files }}"
+      tags: docker
