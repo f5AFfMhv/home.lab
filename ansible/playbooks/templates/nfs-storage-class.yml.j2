@@ -7,7 +7,7 @@ metadata:
 spec:
   chart: nfs-subdir-external-provisioner
   repo: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner
-  targetNamespace: default
+  targetNamespace: kube-system
   set:
     nfs.server: {{ groups.nfs[0] }}
     nfs.path: {{ nfs_path }}

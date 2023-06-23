@@ -26,3 +26,5 @@ resources:
     url: https://github.com/sharkdp/bat/releases/download/v0.23.0/bat_0.23.0_amd64.deb
 
 nfs_path: /opt/nfs
+
+registry_hostname: docker.pve.home.lab

@@ -1,2 +1,4 @@
 ---
 # defaults file for k3s
+registry_hostname: registry.example.com
+registry_port: 5000

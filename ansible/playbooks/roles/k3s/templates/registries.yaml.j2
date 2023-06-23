@@ -1,0 +1,8 @@
+mirrors:
+  "{{ registry_hostname }}:{{ registry_port }}":
+    endpoint:
+      - "http://{{ registry_hostname }}:{{ registry_port }}"
+configs:
+  "mycustomreg:5000":
+    tls:
+      insecure_skip_verify: true

@@ -22,6 +22,15 @@
       ansible.builtin.debug:
         msg: "{{ k3s_output.stdout_lines + k3s_output.stderr_lines }}"
 
+    - name: Configure local image registry
+      ansible.builtin.template:
+        src: registries.yaml.j2
+        dest: /etc/rancher/k3s/registries.yaml
+        owner: root
+        group: root
+        mode: "0600"
+      notify: Restart k3s service
+
     - name: Read node token file
       ansible.builtin.command:
         cmd: cat /var/lib/rancher/k3s/server/node-token
