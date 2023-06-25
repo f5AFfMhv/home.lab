@@ -4,7 +4,8 @@
   vars:
     compose_dir: /opt/docker-compose
     compose_files:
-      - portainer-compose.yaml
+      - portainer-agent-compose.yaml
+      # - portainer-compose.yaml
   roles:
     - common
   tasks:

@@ -47,3 +47,9 @@
     cmd: dpkg -i /root/{{ item.name }}
   with_items: "{{ resources }}"
   changed_when: true
+
+- name: Change root home directory to work with z4h ssh teleportation feature
+  ansible.builtin.lineinfile:
+    path: /etc/passwd
+    regexp: '^root:x:0:0:root:/root:/bin/bash$'
+    line: 'root:x:0:0:root:/home/debian:/home/debian/.local/bin/zsh'
