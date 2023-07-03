@@ -1,11 +1,6 @@
 - name: Provision host to run docker containers
   gather_facts: true
   hosts: docker
-  vars:
-    compose_dir: /opt/docker-compose
-    compose_files:
-      - portainer-agent-compose.yaml
-      # - portainer-compose.yaml
   roles:
     - common
   tasks:
@@ -14,6 +9,7 @@
         name:
           - docker-ce
           - docker-compose-plugin
+          - python3-docker
         state: present
 
     - name: Start docker service
@@ -22,27 +18,62 @@
         state: started
         enabled: true
 
-    - name: Create directory for compose files
+    - name: Install docker-compose module
+      ansible.builtin.pip:
+        name: docker-compose
+        extra_args: --break-system-packages
+
+    - name: Create directory for compose files and persistent data
       ansible.builtin.file:
-        name: "{{ compose_dir }}"
+        name: "{{ item }}"
         state: directory
         owner: root
         group: root
         mode: "0770"
+        recurse: true
+      with_items:
+        - "{{ compose_dir }}"
+        - "{{ docker_data_base }}"
 
-    - name: Copy compose files
-      ansible.builtin.copy:
-        src: "../../docker/{{ item }}"
-        dest: "{{ compose_dir }}/{{ item }}"
+    - name: Copy docker environment file
+      ansible.builtin.template:
+        src: docker.env.j2
+        dest: "{{ compose_dir }}/docker.env"
         owner: root
         group: root
-        mode: "0660"
-      with_items: "{{ compose_files }}"
+        mode: "0400"
       tags: docker
 
-    - name: Apply compose files
-      ansible.builtin.command:
-        cmd: "docker compose -f {{ item }} up -d"
-        chdir: "{{ compose_dir }}"
-      with_items: "{{ compose_files }}"
+    - name: Clone Git repository
+      ansible.builtin.git:
+        repo: "{{ repo_url }}"
+        dest: "{{ compose_dir }}/git"
+        depth: 1
+        force: true
+        version: main
       tags: docker
+
+    # - name: Apply compose files
+    #   ansible.builtin.command:
+    #     cmd: "docker compose -f {{ item }} up -d"
+    #     chdir: "{{ compose_dir }}"
+    #   with_items: "{{ compose_files }}"
+    #   tags: docker
+
+    - name: Run docker-compose up
+      community.docker.docker_compose:
+        project_src: "{{ compose_dir }}/git"
+        build: true
+        env_file: "{{ compose_dir }}/docker.env"
+        files: "{{ compose_files }}"
+      register: output
+      tags: docker
+
+    - name: Show docker-compose results
+      ansible.builtin.debug:
+        var: output
+      tags: docker
+
+    # - ansible.builtin.assert:
+    #     that: not output.changed
+    #   tags: docker
