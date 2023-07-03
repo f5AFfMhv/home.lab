@@ -53,13 +53,6 @@
         version: main
       tags: docker
 
-    # - name: Apply compose files
-    #   ansible.builtin.command:
-    #     cmd: "docker compose -f {{ item }} up -d"
-    #     chdir: "{{ compose_dir }}"
-    #   with_items: "{{ compose_files }}"
-    #   tags: docker
-
     - name: Run docker-compose up
       community.docker.docker_compose:
         project_src: "{{ compose_dir }}/git"
@@ -71,9 +64,5 @@
 
     - name: Show docker-compose results
       ansible.builtin.debug:
-        var: output
+        var: output.changed
       tags: docker
-
-    # - ansible.builtin.assert:
-    #     that: not output.changed
-    #   tags: docker

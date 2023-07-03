@@ -4,7 +4,9 @@ compose_dir: /opt/docker-compose
 docker_data_base: "{{ compose_dir }}/data"
 # List of compose files to run from git repository
 compose_files:
-  # - portainer-agent.yml
+  - portainer-agent.yml
+  - dashy.yml
   - rpi_compose_files/librespeed.yml
+  - rpi_compose_files/traefik.yml
   - filebrowser.yml
   - youtube-dl.yml

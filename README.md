@@ -64,3 +64,14 @@ Provisions new [K3S](https://k3s.io/) kubernetes cluster. It uses k3s quickstart
 cd ansible
 ansible-playbook playbooks/k3s_provision.yml
 ```
+
+### docker.yml
+
+Installs docker and docker-compose utilities. Pulls git repository configured in `ansible/group_vars/docker.yml` and runs docker-compose files from it. Docker compose environment variables are deployed from `ansible/playbooks/templates/docker.env.j2`.
+
+```bash
+cd ansible
+ansible-playbook playbooks/docker.yml
+# For just updating docker services
+ansible-playbook playbooks/docker.yml --tags docker
+```
