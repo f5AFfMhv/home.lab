@@ -2,11 +2,21 @@
 repo_url: https://github.com/f5AFfMhv/docker-compose-files.git
 compose_dir: /opt/docker-compose
 docker_data_base: "{{ compose_dir }}/data"
+external_network: caddy-network
 # List of compose files to run from git repository
 compose_files:
   - portainer-agent.yml
-  - dashy.yml
+  - caddy.yml
   - rpi_compose_files/librespeed.yml
-  - rpi_compose_files/traefik.yml
-  - filebrowser.yml
-  - youtube-dl.yml
+  - rpi_compose_files/gitea.yml
+  - rpi_compose_files/flame.yml
+
+services:
+  - name: speedtest
+    port: 80
+  - name: gitea
+    port: 3000
+  - name: flame
+    port: 5005
+
+external_domain: pve.home.lab

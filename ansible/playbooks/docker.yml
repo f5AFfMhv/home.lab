@@ -23,7 +23,7 @@
         name: docker-compose
         extra_args: --break-system-packages
 
-    - name: Create directory for compose files and persistent data
+    - name: Create directories
       ansible.builtin.file:
         name: "{{ item }}"
         state: directory
@@ -34,6 +34,32 @@
       with_items:
         - "{{ compose_dir }}"
         - "{{ docker_data_base }}"
+        - "{{ docker_data_base }}/caddy"
+
+    - name: Create common network
+      ansible.builtin.command:
+        cmd: "docker network create {{ external_network }}"
+      changed_when: docker_network.rc != 0
+      ignore_errors: true
+      register: docker_network
+
+    - name: Create private key (RSA, 4096 bits)
+      community.crypto.openssl_privatekey:
+        path: "{{ docker_data_base }}/caddy/server.key"
+
+    - name: Create certificate signing request (CSR) for self-signed certificate
+      community.crypto.openssl_csr_pipe:
+        privatekey_path: "{{ docker_data_base }}/caddy/server.key"
+        common_name: "*.{{ external_domain }}"
+        organization_name: Home Lab
+      register: csr
+
+    - name: Create self-signed certificate from CSR
+      community.crypto.x509_certificate:
+        path: "{{ docker_data_base }}/caddy/server.crt"
+        csr_content: "{{ csr.csr }}"
+        privatekey_path: "{{ docker_data_base }}/caddy/server.key"
+        provider: selfsigned
 
     - name: Copy docker environment file
       ansible.builtin.template:
@@ -42,6 +68,15 @@
         owner: root
         group: root
         mode: "0400"
+      tags: docker
+
+    - name: Copy caddyfile
+      ansible.builtin.template:
+        src: Caddyfile.j2
+        dest: "{{ docker_data_base }}/caddy/Caddyfile"
+        owner: root
+        group: root
+        mode: "0664"
       tags: docker
 
     - name: Clone Git repository

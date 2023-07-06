@@ -1,0 +1,9 @@
+*.{{ external_domain }} {
+	tls /server.crt /server.key
+}
+
+{% for svc in services %}
+{{ svc.name }}.{{ external_domain }} {
+  reverse_proxy {{ svc.name }}:{{ svc.port }}
+}
+{% endfor %}
