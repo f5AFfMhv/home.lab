@@ -7,6 +7,8 @@ external_network: caddy-network
 compose_files:
   - portainer-agent.yml
   - caddy.yml
+  - mariadb.yml
+  - nextcloud.yml
   - rpi_compose_files/librespeed.yml
   - rpi_compose_files/gitea.yml
   - rpi_compose_files/flame.yml
@@ -18,5 +20,7 @@ services:
     port: 3000
   - name: flame
     port: 5005
+  - name: nextcloud
+    port: 80
 
 external_domain: pve.home.lab
