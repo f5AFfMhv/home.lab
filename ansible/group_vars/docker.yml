@@ -1,26 +1,62 @@
 ---
 repo_url: https://github.com/f5AFfMhv/docker-compose-files.git
 compose_dir: /opt/docker-compose
-docker_data_base: "{{ compose_dir }}/data"
+config_dir: "{{ compose_dir }}/config"
 external_network: caddy-network
+data_dir: /opt/data
+
 # List of compose files to run from git repository
 compose_files:
-  - portainer-agent.yml
-  - caddy.yml
-  - mariadb.yml
-  - nextcloud.yml
-  - rpi_compose_files/librespeed.yml
-  - rpi_compose_files/gitea.yml
-  - rpi_compose_files/flame.yml
+  - portainer-agent.yaml
+  - caddy.yaml
+  - filebrowser.yaml
+  - open_speedtest.yaml
+  - arr_stack.yaml
+  - audiobookshelf.yaml
+  - freshrss.yaml
+  - gitea.yaml
+  - homarr.yaml
+  - jellyfin.yaml
+  - kavita.yaml
+  - speedtest-tracker.yaml
+  - torrent.yaml
+  - uptime_kuma.yaml
+  - vaultwarden.yaml
+  - youtube.yaml
 
+# Service port map for external caddy network
 services:
-  - name: speedtest
+  - name: prowlarr
+    port: 9696
+  - name: sonarr
+    port: 8989
+  - name: radarr
+    port: 7878
+  - name: jellyseerr
+    port: 5055
+  - name: audiobookshelf
+    port: 80
+  - name: filebrowser
+    port: 8080
+  - name: freshrss
     port: 80
   - name: gitea
     port: 3000
-  - name: flame
-    port: 5005
-  - name: nextcloud
+  - name: homarr
+    port: 7575
+  - name: jellyfin
+    port: 8096
+  - name: speedtest
+    port: 3000
+  - name: kavita
+    port: 5000
+  - name: speedtest-tracker
     port: 80
-
-external_domain: pve.home.lab
+  - name: uptime-kuma
+    port: 3001
+  - name: vaultwarden
+    port: 80
+  - name: tubesync
+    port: 4848
+  - name: metube
+    port: 8081

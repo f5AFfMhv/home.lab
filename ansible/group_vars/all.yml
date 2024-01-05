@@ -1,4 +1,6 @@
 ---
+user: debian
+
 gpg_keys:
   - https://download.docker.com/linux/debian/gpg
 apt_repositories:

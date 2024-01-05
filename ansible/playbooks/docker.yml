@@ -1,6 +1,6 @@
 - name: Provision host to run docker containers
   gather_facts: true
-  hosts: docker
+  hosts: docker-dev
   roles:
     - common
   tasks:
@@ -27,14 +27,20 @@
       ansible.builtin.file:
         name: "{{ item }}"
         state: directory
-        owner: root
-        group: root
-        mode: "0770"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0760"
         recurse: true
       with_items:
-        - "{{ compose_dir }}"
-        - "{{ docker_data_base }}"
-        - "{{ docker_data_base }}/caddy"
+        - "{{ config_dir }}/caddy"
+        - "{{ data_dir }}/audiobooks"
+        - "{{ data_dir }}/books"
+        - "{{ data_dir }}/downloads"
+        - "{{ data_dir }}/files"
+        - "{{ data_dir }}/movies"
+        - "{{ data_dir }}/music"
+        - "{{ data_dir }}/podcasts"
+        - "{{ data_dir }}/tvshows"
 
     - name: Create common network
       ansible.builtin.command:
@@ -45,60 +51,71 @@
 
     - name: Create private key (RSA, 4096 bits)
       community.crypto.openssl_privatekey:
-        path: "{{ docker_data_base }}/caddy/server.key"
+        path: "{{ config_dir }}/caddy/server.key"
 
     - name: Create certificate signing request (CSR) for self-signed certificate
       community.crypto.openssl_csr_pipe:
-        privatekey_path: "{{ docker_data_base }}/caddy/server.key"
+        privatekey_path: "{{ config_dir }}/caddy/server.key"
         common_name: "*.{{ external_domain }}"
         organization_name: Home Lab
       register: csr
 
     - name: Create self-signed certificate from CSR
       community.crypto.x509_certificate:
-        path: "{{ docker_data_base }}/caddy/server.crt"
+        path: "{{ config_dir }}/caddy/server.crt"
         csr_content: "{{ csr.csr }}"
-        privatekey_path: "{{ docker_data_base }}/caddy/server.key"
+        privatekey_path: "{{ config_dir }}/caddy/server.key"
         provider: selfsigned
-
-    - name: Copy docker environment file
-      ansible.builtin.template:
-        src: docker.env.j2
-        dest: "{{ compose_dir }}/docker.env"
-        owner: root
-        group: root
-        mode: "0400"
-      tags: docker
 
     - name: Copy caddyfile
       ansible.builtin.template:
         src: Caddyfile.j2
-        dest: "{{ docker_data_base }}/caddy/Caddyfile"
-        owner: root
-        group: root
+        dest: "{{ config_dir }}/caddy/Caddyfile"
+        owner: "{{ user }}"
+        group: "{{ user }}"
         mode: "0664"
       tags: docker
+
+    - name: Change caddy config permissions
+      ansible.builtin.file:
+        path: "{{ config_dir }}/caddy"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0760"
+        recurse: true
 
     - name: Clone Git repository
       ansible.builtin.git:
         repo: "{{ repo_url }}"
-        dest: "{{ compose_dir }}/git"
+        dest: "{{ compose_dir }}/docker-compose-files"
         depth: 1
         force: true
         version: main
       tags: docker
 
+    - name: Copy docker environment file
+      ansible.builtin.template:
+        src: docker.env.j2
+        dest: "{{ compose_dir }}/docker-compose-files/.env"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0400"
+      tags: docker
+
+    - name: Change repository permissions
+      ansible.builtin.file:
+        path: "{{ compose_dir }}/docker-compose-files"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0760"
+        recurse: true
+
     - name: Run docker-compose up
       community.docker.docker_compose:
-        project_src: "{{ compose_dir }}/git"
+        project_src: "{{ compose_dir }}/docker-compose-files"
         build: true
-        env_file: "{{ compose_dir }}/docker.env"
+        env_file: "{{ compose_dir }}/docker-compose-files/.env"
         files: "{{ compose_files }}"
         remove_orphans: true
       register: output
-      tags: docker
-
-    - name: Show docker-compose results
-      ansible.builtin.debug:
-        var: output.changed
       tags: docker
