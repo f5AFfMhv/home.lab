@@ -1,9 +1,9 @@
 [[outputs.influxdb_v2]]
-    urls = ["{{ telegraf_url }}"]
+    urls = ["{{ influxdb_url }}"]
     user_agent = "telegraf"
-    token = "{{ telegraf_token }}"
-    organization = "{{ telegraf_org }}"
-    bucket = "{{ telegraf_bucket }}"
+    token = "{{ influxdb_token }}"
+    organization = "{{ influxdb_org }}"
+    bucket = "{{ influxdb_bucket }}"
     insecure_skip_verify = true
 
 # Read metrics about cpu usage
@@ -59,4 +59,4 @@
 
 # Read metrics about system load & uptime
 [[inputs.system]]
-  # no configuration
+    # no configuration

@@ -34,7 +34,9 @@ nfs_path: /opt/nfs
 
 registry_hostname: docker.pve.home.lab
 
-telegraf_url: https://influxdb.home.lab:443
-telegraf_org: home
-telegraf_bucket: linux_test
-# telegraf_token: "telegraf-api-key"
+influxdb_ip: "192.168.1.13"
+influxdb_host: influxdb.home.lab
+influxdb_url: "https://{{ influxdb_host }}:443"
+influxdb_org: home
+influxdb_bucket: linux
+# influxdb_token: "influxdb-api-key"

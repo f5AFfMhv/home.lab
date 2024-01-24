@@ -17,7 +17,6 @@
     - name: Finnishing tasks for cp
       when: inventory_hostname == groups.k3s_cp[0]
       block:
-
         - name: Deploy nfs storage class provisioner
           ansible.builtin.template:
             src: templates/nfs-storage-class.yml.j2
@@ -45,3 +44,9 @@
           ansible.builtin.debug:
             msg: "{{ test.stdout_lines }}"
           tags: test_cluster
+
+    - name: Change root home directory to work with z4h ssh teleportation feature
+      ansible.builtin.lineinfile:
+        path: /etc/passwd
+        regexp: "^root:x:0:0:root:/root:/bin/bash$"
+        line: "root:x:0:0:root:/home/{{ user }}:/home/{{ user }}/.local/bin/zsh"
