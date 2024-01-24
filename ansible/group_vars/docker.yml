@@ -3,26 +3,28 @@ repo_url: https://github.com/f5AFfMhv/docker-compose-files.git
 compose_dir: /opt/docker-compose
 config_dir: "{{ compose_dir }}/config"
 external_network: caddy-network
-data_dir: /opt/data
 
 # List of compose files to run from git repository
 compose_files:
   - portainer-agent.yaml
   - caddy.yaml
   - filebrowser.yaml
-  - open_speedtest.yaml
+  - libre_speedtest.yaml
   - arr_stack.yaml
   - audiobookshelf.yaml
-  - freshrss.yaml
-  - gitea.yaml
   - homarr.yaml
   - jellyfin.yaml
   - kavita.yaml
   - speedtest-tracker.yaml
   - torrent.yaml
-  - uptime_kuma.yaml
   - vaultwarden.yaml
   - youtube.yaml
+  - watchtower.yaml
+  - moon_server.yaml
+  - mqtt.yaml
+  - grafana.yaml
+  - syncthing.yaml
+  - gitea.yaml
 
 # Service port map for external caddy network
 services:
@@ -48,6 +50,8 @@ services:
     port: 8096
   - name: speedtest
     port: 3000
+  - name: librespeed
+    port: 80
   - name: kavita
     port: 5000
   - name: speedtest-tracker
@@ -60,3 +64,9 @@ services:
     port: 4848
   - name: metube
     port: 8081
+  - name: grafana
+    port: 3000
+  - name: syncthing
+    port: 8384
+  - name: influxdb
+    port: 8086

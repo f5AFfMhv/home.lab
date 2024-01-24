@@ -1,6 +1,6 @@
 - name: Provision host to run docker containers
   gather_facts: true
-  hosts: docker-dev
+  hosts: docker-prd
   roles:
     - common
   tasks:
@@ -9,6 +9,7 @@
         name:
           - docker-ce
           - docker-compose-plugin
+          - docker-compose
           - python3-docker
         state: present
 
@@ -18,10 +19,10 @@
         state: started
         enabled: true
 
-    - name: Install docker-compose module
-      ansible.builtin.pip:
-        name: docker-compose
-        extra_args: --break-system-packages
+    # - name: Install docker-compose module
+    #   ansible.builtin.pip:
+    #     name: docker-compose
+    #     extra_args: --break-system-packages
 
     - name: Create directories
       ansible.builtin.file:
@@ -33,14 +34,13 @@
         recurse: true
       with_items:
         - "{{ config_dir }}/caddy"
-        - "{{ data_dir }}/audiobooks"
-        - "{{ data_dir }}/books"
         - "{{ data_dir }}/downloads"
         - "{{ data_dir }}/files"
         - "{{ data_dir }}/movies"
         - "{{ data_dir }}/music"
         - "{{ data_dir }}/podcasts"
         - "{{ data_dir }}/tvshows"
+        - "{{ data_dir }}/pictures"
 
     - name: Create common network
       ansible.builtin.command:
@@ -109,6 +109,7 @@
         group: "{{ user }}"
         mode: "0760"
         recurse: true
+      tags: docker
 
     - name: Run docker-compose up
       community.docker.docker_compose:
@@ -119,3 +120,17 @@
         remove_orphans: true
       register: output
       tags: docker
+
+    - name: Change config dir owner
+      ansible.builtin.file:
+        path: "{{ config_dir }}"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        recurse: true
+      tags: docker
+
+    - name: Change root home directory to work with z4h ssh teleportation feature
+      ansible.builtin.lineinfile:
+        path: /etc/passwd
+        regexp: "^root:x:0:0:root:/root:/bin/bash$"
+        line: "root:x:0:0:root:/home/{{ user }}:/home/{{ user }}/.local/bin/zsh"

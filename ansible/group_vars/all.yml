@@ -3,8 +3,10 @@ user: debian
 
 gpg_keys:
   - https://download.docker.com/linux/debian/gpg
+  - https://repos.influxdata.com/influxdata-archive_compat.key
 apt_repositories:
   - "deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable"
+  - "deb [arch=amd64] https://repos.influxdata.com/debian stable main"
 
 packages:
   - vim
@@ -20,6 +22,7 @@ packages:
   - python3-pip
   - thefuck
   - nfs-common
+  - telegraf
 
 resources:
   - name: lsd.deb
@@ -30,3 +33,8 @@ resources:
 nfs_path: /opt/nfs
 
 registry_hostname: docker.pve.home.lab
+
+telegraf_url: https://influxdb.home.lab:443
+telegraf_org: home
+telegraf_bucket: linux_test
+# telegraf_token: "telegraf-api-key"

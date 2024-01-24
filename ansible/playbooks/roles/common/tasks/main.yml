@@ -48,8 +48,11 @@
   with_items: "{{ resources }}"
   changed_when: true
 
-- name: Change root home directory to work with z4h ssh teleportation feature
-  ansible.builtin.lineinfile:
-    path: /etc/passwd
-    regexp: '^root:x:0:0:root:/root:/bin/bash$'
-    line: 'root:x:0:0:root:/home/debian:/home/debian/.local/bin/zsh'
+- name: Copy telegraf.conf
+  ansible.builtin.template:
+    src: telegraf.conf.j2
+    dest: "/etc/telegraf/telegraf.conf"
+    owner: root
+    group: root
+    mode: "0664"
+  notify: Restart telegraf
