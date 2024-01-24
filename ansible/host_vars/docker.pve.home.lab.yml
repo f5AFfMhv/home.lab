@@ -1,0 +1,3 @@
+---
+external_domain: pve.home.lab
+data_dir: /opt/data

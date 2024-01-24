@@ -1,0 +1,5 @@
+- name: Sysprep pihole lxc container
+  gather_facts: true
+  hosts: docker-dev #pihole
+  roles:
+    - common

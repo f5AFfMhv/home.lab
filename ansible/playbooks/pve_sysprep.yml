@@ -1,0 +1,5 @@
+- name: Sysprep proxmox servers
+  gather_facts: true
+  hosts: pve
+  roles:
+    - common
