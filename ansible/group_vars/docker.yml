@@ -4,6 +4,23 @@ compose_dir: /opt/docker-compose
 config_dir: "{{ compose_dir }}/config"
 external_network: caddy-network
 
+# Prometheus exporters configuration
+prometheus_job:
+  - target: mqtt2prometheus
+    port: 9641
+  - target: sonarr-exporter
+    port: 9707
+  - target: radarr-exporter
+    port: 9708
+  - target: pihole-exporter
+    port: 9617
+  - target: speedtest-exporter
+    port: 9798
+  - target: node-exporter
+    port: 9100
+  - target: pc.home.lab
+    port: 9100
+
 # List of compose files to run from git repository
 compose_files:
   - portainer-agent.yaml
@@ -15,7 +32,6 @@ compose_files:
   - homarr.yaml
   - jellyfin.yaml
   - kavita.yaml
-  - speedtest-tracker.yaml
   - torrent.yaml
   - vaultwarden.yaml
   - youtube.yaml
@@ -25,6 +41,7 @@ compose_files:
   - grafana.yaml
   - syncthing.yaml
   - gitea.yaml
+  - prometheus.yaml
 
 # Service port map for external caddy network
 services:

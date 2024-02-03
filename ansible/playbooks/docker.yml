@@ -1,6 +1,6 @@
 - name: Provision host to run docker containers
   gather_facts: true
-  hosts: docker-prd
+  hosts: docker.home.lab
   roles:
     - common
   tasks:
@@ -34,6 +34,8 @@
         recurse: true
       with_items:
         - "{{ config_dir }}/caddy"
+        - "{{ config_dir }}/prometheus/config"
+        - "{{ config_dir }}/mqtt2prometheus"
         - "{{ data_dir }}/downloads"
         - "{{ data_dir }}/files"
         - "{{ data_dir }}/movies"
@@ -67,7 +69,7 @@
         privatekey_path: "{{ config_dir }}/caddy/server.key"
         provider: selfsigned
 
-    - name: Copy caddyfile
+    - name: Create Caddyfile
       ansible.builtin.template:
         src: Caddyfile.j2
         dest: "{{ config_dir }}/caddy/Caddyfile"
@@ -76,13 +78,23 @@
         mode: "0664"
       tags: docker
 
-    - name: Change caddy config permissions
-      ansible.builtin.file:
-        path: "{{ config_dir }}/caddy"
+    - name: Create prometheus configuration
+      ansible.builtin.template:
+        src: prometheus.yml.j2
+        dest: "{{ config_dir }}/prometheus/config/prometheus.yml"
         owner: "{{ user }}"
         group: "{{ user }}"
-        mode: "0760"
-        recurse: true
+        mode: "0664"
+      tags: docker
+
+    - name: Copy mqtt2prometheus configuration
+      ansible.builtin.copy:
+        src: prometheus2mqtt_config.yaml
+        dest: "{{ config_dir }}/mqtt2prometheus/prometheus2mqtt_config.yaml"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0664"
+      tags: docker
 
     - name: Clone Git repository
       ansible.builtin.git:

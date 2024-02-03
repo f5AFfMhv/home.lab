@@ -4,7 +4,3 @@
   roles:
     - common
   tasks:
-    - name: influxdb server name resolution workaround
-      ansible.builtin.lineinfile:
-        path: /etc/hosts
-        line: "{{ influxdb_ip }} {{ influxdb_host }}"

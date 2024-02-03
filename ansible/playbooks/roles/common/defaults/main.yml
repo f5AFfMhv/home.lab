@@ -4,4 +4,3 @@ gpg_keys: []
 apt_repositories: []
 packages: []
 resources: []
-influxdb_token: "api-key"

@@ -3,3 +3,4 @@
   hosts: pve
   roles:
     - common
+  tasks:

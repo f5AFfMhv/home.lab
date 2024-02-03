@@ -3,4 +3,4 @@ terraform/*/.terraform*
 terraform/*/env.sh
 terraform/*/terraform.*
 ansible/playbooks/templates/docker.env.j2
-ansible/playbooks/roles/common/vars/main.yml
+ansible/playbooks/templates/pve.yml.j2

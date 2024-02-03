@@ -1,7 +1,0 @@
----
-# handlers file for common
-- name: Restart telegraf
-  ansible.builtin.service:
-    name: telegraf
-    state: restarted
-    enabled: true

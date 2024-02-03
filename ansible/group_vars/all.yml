@@ -3,10 +3,8 @@ user: debian
 
 gpg_keys:
   - https://download.docker.com/linux/debian/gpg
-  - https://repos.influxdata.com/influxdata-archive_compat.key
 apt_repositories:
   - "deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable"
-  - "deb [arch=amd64] https://repos.influxdata.com/debian stable main"
 
 packages:
   - vim
@@ -14,6 +12,7 @@ packages:
   - git
   - wget
   - htop
+  - lsd
   - apt-transport-https
   - ca-certificates
   - bash-completion
@@ -22,21 +21,12 @@ packages:
   - python3-pip
   - thefuck
   - nfs-common
-  - telegraf
+  - lm-sensors
 
 resources:
-  - name: lsd.deb
-    url: https://github.com/lsd-rs/lsd/releases/download/0.23.1/lsd_0.23.1_amd64.deb
   - name: bat.deb
-    url: https://github.com/sharkdp/bat/releases/download/v0.23.0/bat_0.23.0_amd64.deb
+    url: https://github.com/sharkdp/bat/releases/download/v0.24.0/bat-musl_0.24.0_amd64.deb
 
 nfs_path: /opt/nfs
 
 registry_hostname: docker.pve.home.lab
-
-influxdb_ip: "192.168.1.13"
-influxdb_host: influxdb.home.lab
-influxdb_url: "https://{{ influxdb_host }}:443"
-influxdb_org: home
-influxdb_bucket: linux
-# influxdb_token: "influxdb-api-key"
