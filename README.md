@@ -112,6 +112,8 @@ ansible-playbook playbooks/docker.yml --tags docker
 Apply basic system preparation changes for proxmox installations.
 
 ```bash
+# Install ansible prometheus collection.
+ansible-galaxy collection install prometheus.prometheus
 cd ansible
 ansible-playbook playbooks/pve_sysprep.yml
 ```

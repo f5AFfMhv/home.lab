@@ -20,6 +20,10 @@ prometheus_job:
     port: 9100
   - target: pc.home.lab
     port: 9100
+  - target: pve.home.lab
+    port: 9100
+  - target: srv.home.lab
+    port: 9100
 
 # List of compose files to run from git repository
 compose_files:
