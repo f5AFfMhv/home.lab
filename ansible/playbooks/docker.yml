@@ -1,6 +1,6 @@
 - name: Provision host to run docker containers
   gather_facts: true
-  hosts: docker.home.lab
+  hosts: docker
   roles:
     - common
   tasks:
