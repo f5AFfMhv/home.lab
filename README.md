@@ -117,3 +117,12 @@ ansible-galaxy collection install prometheus.prometheus
 cd ansible
 ansible-playbook playbooks/pve_sysprep.yml
 ```
+
+## os_update.yml
+
+Update all debian inventory hosts.
+
+```bash
+cd ansible
+ansible-playbook playbooks/os_update.yml
+```
