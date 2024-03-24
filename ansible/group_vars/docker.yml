@@ -46,6 +46,7 @@ compose_files:
   - syncthing.yaml
   - gitea.yaml
   - prometheus.yaml
+  - photoview.yaml
 
 # Service port map for external caddy network
 services:
@@ -91,3 +92,5 @@ services:
     port: 8384
   - name: influxdb
     port: 8086
+  - name: photoview
+    port: 80
