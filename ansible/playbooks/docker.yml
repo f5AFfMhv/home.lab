@@ -34,6 +34,7 @@
         recurse: true
       with_items:
         - "{{ config_dir }}/caddy"
+        - "{{ config_dir }}/homepage"
         - "{{ config_dir }}/prometheus/config"
         - "{{ config_dir }}/mqtt2prometheus"
         - "{{ data_dir }}/downloads"
@@ -76,6 +77,20 @@
         owner: "{{ user }}"
         group: "{{ user }}"
         mode: "0664"
+      tags: docker
+
+    - name: Create Homepage configuration files
+      ansible.builtin.template:
+        src: "{{ item }}.j2"
+        dest: "{{ config_dir }}/homepage/{{ item }}"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0664"
+      with_items:
+        - bookmarks.yaml
+        - services.yaml
+        - settings.yaml
+        - widgets.yaml
       tags: docker
 
     - name: Create prometheus configuration

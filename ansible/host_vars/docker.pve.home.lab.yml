@@ -1,3 +1,11 @@
 ---
 external_domain: pve.home.lab
 data_dir: /opt/data
+
+# Homepage widget secrets
+portainer_key: "ptr_xxx="
+proxmox_key: xxx
+pihole_key: xxx
+deluge_password: xxx
+weatherapi_key: xxx
+openweathermap_key: xxx

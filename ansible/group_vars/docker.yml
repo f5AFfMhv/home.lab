@@ -33,7 +33,6 @@ compose_files:
   - libre_speedtest.yaml
   - arr_stack.yaml
   - audiobookshelf.yaml
-  - homarr.yaml
   - jellyfin.yaml
   - kavita.yaml
   - torrent.yaml
@@ -47,6 +46,7 @@ compose_files:
   - gitea.yaml
   - prometheus.yaml
   - photoview.yaml
+  - homepage.yaml
 
 # Service port map for external caddy network
 services:
@@ -66,8 +66,6 @@ services:
     port: 80
   - name: gitea
     port: 3000
-  - name: homarr
-    port: 7575
   - name: jellyfin
     port: 8096
   - name: speedtest
@@ -94,3 +92,5 @@ services:
     port: 8086
   - name: photoview
     port: 80
+  - name: homepage
+    port: 3000

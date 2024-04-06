@@ -1,0 +1,132 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/latest/configs/services
+
+- Admin:
+    - Moon Lamp:
+        href: http://docker.home.lab:9015/
+        icon: roundcube.png
+        ping: 192.168.1.247
+    - Vaultwarden:
+        href: https://vaultwarden.home.lab/
+        icon: vaultwarden.png
+        siteMonitor: https://vaultwarden.home.lab/
+    - Syncthing:
+        href: https://syncthing.home.lab/
+        icon: syncthing.png
+        siteMonitor: https://syncthing.home.lab/
+    - Gitea:
+        href: https://gitea.home.lab/
+        icon: gitea.png
+        siteMonitor: https://gitea.home.lab/
+
+- Media:
+    - Jellyfin:
+        href: https://jellyfin.home.lab/
+        icon: jellyfin.png
+        siteMonitor: https://jellyfin.home.lab/
+    - Audiobookshelf:
+        href: https://audiobookshelf.home.lab/
+        icon: audiobookshelf.png
+        siteMonitor: https://audiobookshelf.home.lab/
+    - Filebrowser:
+        href: https://filebrowser.home.lab/
+        icon: filebrowser.png
+        siteMonitor: https://filebrowser.home.lab/
+    - Kavita:
+        href: https://kavita.home.lab/
+        icon: kavita.png
+        siteMonitor: https://kavita.home.lab/
+    - Photoview:
+        href: https://photoview.home.lab/
+        icon: photoview.png
+        siteMonitor: https://photoview.home.lab/
+
+- Server:
+    - Portainer:
+        href: "https://pc.home.lab:9443/#!/auth"
+        icon: portainer.png
+        ping: 192.168.1.2
+        widget:
+          type: portainer
+          url: https://pc.home.lab:9443
+          env: 6
+          key: portainer_key
+    - SRV:
+        href: https://srv.home.lab:8006/
+        icon: proxmox.png
+        description: PROD
+        ping: 192.168.1.12
+        widget:
+          type: proxmox
+          url: https://srv.home.lab:8006
+          username: homepage@pam!homepage
+          password: proxmox_key
+    - PiHole:
+        href: http://pihole.home.lab/admin
+        icon: pi-hole.png
+        ping: 192.168.1.40
+        siteMonitor: http://pihole.home.lab/admin
+        widget:
+          type: pihole
+          url: http://pihole.home.lab
+          key: pihole_key
+    - PVE:
+        href: https://pve.home.lab:8006/
+        icon: proxmox.png
+        description: DEV
+        ping: 192.168.1.3
+    - Router:
+        href: https://192.168.1.1/
+        icon: router.png
+        description: AX1800 Wi-Fi 6 Router
+        ping: 192.168.1.1
+    - EmonESP:
+        href: http://192.168.1.242/
+        icon: lnbits.png
+        ping: 192.168.1.242
+
+- Arr Stack:
+    - Jellyseerr:
+        href: https://jellyseerr.home.lab/
+        icon: jellyseerr.png
+        siteMonitor: https://jellyseerr.home.lab/
+    - Sonarr:
+        href: https://sonarr.home.lab/
+        icon: sonarr.png
+        siteMonitor: https://sonarr.home.lab/
+    - Radarr:
+        href: https://radarr.home.lab/
+        icon: radarr.png
+        siteMonitor: https://radarr.home.lab/
+    - Prowlarr:
+        href: https://prowlarr.home.lab/
+        icon: prowlarr.png
+        siteMonitor: https://prowlarr.home.lab/
+
+- Monitoring:
+    - Grafana:
+        href: https://grafana.home.lab/
+        icon: grafana.png
+        siteMonitor: https://grafana.home.lab/
+    - Librespeed:
+        href: http://docker.home.lab:9008/
+        icon: librespeed.png
+        siteMonitor: http://docker.home.lab:9008/
+
+- Download:
+    - TubeSync:
+        href: https://tubesync.home.lab/
+        icon: tubesync.png
+        siteMonitor: https://tubesync.home.lab/
+    - Metube:
+        href: https://metube.home.lab/
+        icon: metube.png
+        siteMonitor: https://metube.home.lab/
+    - Deluge:
+        href: http://docker.home.lab:8112/
+        icon: deluge.png
+        widget:
+          type: deluge
+          url: http://docker.home.lab:8112
+          password: deluge_password
