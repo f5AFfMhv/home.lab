@@ -51,7 +51,7 @@
           type: portainer
           url: https://pc.home.lab:9443
           env: 6
-          key: portainer_key
+          key: {{ portainer_key }}
     - SRV:
         href: https://srv.home.lab:8006/
         icon: proxmox.png
@@ -61,7 +61,7 @@
           type: proxmox
           url: https://srv.home.lab:8006
           username: homepage@pam!homepage
-          password: proxmox_key
+          password: {{ proxmox_key }}
     - PiHole:
         href: http://pihole.home.lab/admin
         icon: pi-hole.png
@@ -70,7 +70,7 @@
         widget:
           type: pihole
           url: http://pihole.home.lab
-          key: pihole_key
+          key: {{ pihole_key }}
     - PVE:
         href: https://pve.home.lab:8006/
         icon: proxmox.png
@@ -129,4 +129,4 @@
         widget:
           type: deluge
           url: http://docker.home.lab:8112
-          password: deluge_password
+          password: {{ deluge_password }}

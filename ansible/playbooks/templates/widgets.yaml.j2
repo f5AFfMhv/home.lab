@@ -8,7 +8,7 @@
 - resources:
     cpu: true
     memory: true
-    disk: /home
+    disk: /mnt/data
     cputemp: false
     uptime: true
     units: metric
@@ -23,7 +23,7 @@
     latitude: 54.6872
     longitude: 25.2797
     units: metric
-    apiKey: weatherapi_key
+    apiKey: {{ weatherapi_key }}
     cache: 5 # Time in minutes to cache API responses, to stay within limits
     format: # optional, Intl.NumberFormat options
       maximumFractionDigits: 1
