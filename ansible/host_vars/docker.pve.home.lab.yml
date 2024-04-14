@@ -9,3 +9,4 @@ pihole_key: xxx
 deluge_password: xxx
 weatherapi_key: xxx
 openweathermap_key: xxx
+sonarr_key: xxx

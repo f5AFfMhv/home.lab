@@ -91,7 +91,9 @@
         - services.yaml
         - settings.yaml
         - widgets.yaml
-      tags: docker
+      tags:
+        - docker
+        - homepage
 
     - name: Create prometheus configuration
       ansible.builtin.template:
