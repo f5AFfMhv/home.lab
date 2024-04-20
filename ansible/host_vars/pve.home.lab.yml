@@ -1,0 +1,26 @@
+---
+scripts:
+  - url: https://raw.githubusercontent.com/f5AFfMhv/Random-Scripts/master/pve_backup_verify.sh
+    name: pve_backup_verify.sh
+cron_env:
+  - var: BASE_DIR
+    val: "{{ script_path }}"
+  - var: HC_PVE_DOCKER
+    val: xxx
+  - var: HC_PVE_PIHOLE
+    val: xxx
+  - var: HC_PVE_PING
+    val: xxx
+cron_jobs:
+  - name: Send ping to healthchecks server
+    job: "/usr/bin/curl --retry 3 https://hc-ping.com/$HC_PVE_PING"
+    minute: "*/10"
+    hour: "*"
+  - name: Send healthchecks for Docker VM backup
+    job: "{{ script_path }}/pve_backup_verify.sh 101 $HC_PVE_DOCKER"
+    minute: "0"
+    hour: "6"
+  - name: Send healthchecks for PiHole container backup
+    job: "{{ script_path }}/pve_backup_verify.sh 102 $HC_PVE_PIHOLE"
+    minute: "0"
+    hour: "6"
