@@ -94,3 +94,9 @@ services:
     port: 80
   - name: homepage
     port: 3000
+
+cron_jobs:
+  - name: Send ping to healthchecks server
+    job: "/usr/bin/curl --retry 3 https://hc-ping.com/$HC_DOCKER_PING"
+    minute: "*/10"
+    hour: "*"

@@ -163,3 +163,21 @@
         path: /etc/passwd
         regexp: "^root:x:0:0:root:/root:/bin/bash$"
         line: "root:x:0:0:root:/home/{{ user }}:/home/{{ user }}/.local/bin/zsh"
+
+    - name: Create env vars in crontab
+      ansible.builtin.cron:
+        name: "{{ item.var }}"
+        env: true
+        job: "{{ item.val }}"
+      with_items: "{{ cron_env }}"
+      tags: cron
+
+    - name: Create cron jobs
+      ansible.builtin.cron:
+        name: "{{ item.name }}"
+        user: root
+        job: "{{ item.job }}"
+        minute: "{{ item.minute }}"
+        hour: "{{ item.hour }}"
+      with_items: "{{ cron_jobs }}"
+      tags: cron
