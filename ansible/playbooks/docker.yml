@@ -13,6 +13,15 @@
           - python3-docker
         state: present
 
+    - name: Copy docker daemon configuration
+      ansible.builtin.copy:
+        src: daemon.json
+        dest: "/etc/docker/daemon.json"
+        owner: root
+        group: root
+        mode: "0664"
+      notify: Restart docker service
+
     - name: Start docker service
       ansible.builtin.service:
         name: docker
@@ -181,3 +190,9 @@
         hour: "{{ item.hour }}"
       with_items: "{{ cron_jobs }}"
       tags: cron
+
+  handlers:
+    - name: Restart docker service
+      ansible.builtin.service:
+        name: docker
+        state: restarted
