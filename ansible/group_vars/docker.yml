@@ -47,6 +47,7 @@ compose_files:
   - prometheus.yaml
   - photoview.yaml
   - homepage.yaml
+  - cloudflared.yaml
 
 # Service port map for external caddy network
 services:

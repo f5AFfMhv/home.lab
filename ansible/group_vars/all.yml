@@ -13,6 +13,7 @@ packages:
   - wget
   - htop
   - lsd
+  - cron
   - apt-transport-https
   - ca-certificates
   - bash-completion
