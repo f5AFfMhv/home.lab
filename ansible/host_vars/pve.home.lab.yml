@@ -17,7 +17,7 @@ cron_jobs:
     minute: "*/10"
     hour: "*"
   - name: Send healthchecks for Docker VM backup
-    job: "{{ script_path }}/pve_backup_verify.sh 101 $HC_PVE_DOCKER"
+    job: "{{ script_path }}/pve_backup_verify.sh 103 $HC_PVE_DOCKER"
     minute: "0"
     hour: "6"
   - name: Send healthchecks for PiHole container backup
