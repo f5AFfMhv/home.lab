@@ -101,3 +101,7 @@ cron_jobs:
     job: "/usr/bin/curl --retry 3 https://hc-ping.com/$HC_DOCKER_PING"
     minute: "*/10"
     hour: "*"
+  - name: Remove unused docker images
+    job: "/usr/bin/docker image prune -a -f"
+    minute: "0"
+    hour: "12"
