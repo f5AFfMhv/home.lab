@@ -20,10 +20,6 @@
                   unmonitored: false
 
 - Media:
-    - Jellyfin:
-        href: https://jellyfin.home.lab/
-        icon: jellyfin.png
-        siteMonitor: https://jellyfin.home.lab/
     - Audiobookshelf:
         href: https://audiobookshelf.home.lab/
         icon: audiobookshelf.png
@@ -50,10 +46,6 @@
         siteMonitor: https://vaultwarden.home.lab/
 
 - Server:
-    - Moon Lamp:
-        href: http://docker.home.lab:9015/
-        icon: roundcube.png
-        ping: 192.168.1.247
     - Portainer:
         href: "https://pc.home.lab:9443/#!/auth"
         icon: portainer.png
@@ -72,13 +64,17 @@
 #          url: https://srv.home.lab:8006
 #          username: homepage@pam!homepage
 #          password: {{ proxmox_key }}
+    - Raspberry Pi:
+        href: https://pihole.home.lab:9090/
+        icon: raspberrypi.png
+        ping: 192.168.1.40
     - 5G Gateway:
         href: http://192.168.2.1
-        icon: modem.png
+        icon: mdi-wan
         ping: 192.168.2.1
     - Router:
         href: https://192.168.1.1/
-        icon: router.png
+        icon: mdi-lan
         ping: 192.168.1.1
 
 - Arr Stack:
@@ -102,6 +98,10 @@
         href: https://jellyseerr.home.lab/
         icon: jellyseerr.png
         siteMonitor: https://jellyseerr.home.lab/
+    - Jellyfin:
+        href: https://jellyfin.home.lab/
+        icon: jellyfin.png
+        siteMonitor: https://jellyfin.home.lab/
 
 - Monitoring:
     - PiHole:
