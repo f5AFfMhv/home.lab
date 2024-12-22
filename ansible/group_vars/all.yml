@@ -4,7 +4,7 @@ user: debian
 gpg_keys:
   - https://download.docker.com/linux/debian/gpg
 apt_repositories:
-  - "deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable"
+  - "deb [arch={{ 'arm64' if ansible_architecture == 'aarch64' else 'amd64' }}] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable"
 
 packages:
   - vim
@@ -13,6 +13,7 @@ packages:
   - wget
   - htop
   - lsd
+  - bat
   - cron
   - jq
   - apt-transport-https
@@ -24,11 +25,5 @@ packages:
   - thefuck
   - nfs-common
   - lm-sensors
-
-resources:
-  - name: bat.deb
-    url: https://github.com/sharkdp/bat/releases/download/v0.24.0/bat-musl_0.24.0_amd64.deb
-  - name: powerpanel.deb
-    url: https://dl4jz3rbrsfum.cloudfront.net/software/PPL_64bit_v1.4.1.deb
 
 registry_hostname: docker.pve.home.lab

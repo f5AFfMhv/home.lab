@@ -1,4 +1,7 @@
 ---
+resources:
+  - name: powerpanel.deb
+    url: https://dl4jz3rbrsfum.cloudfront.net/software/PPL_64bit_v1.4.1.deb
 scripts:
   - url: https://raw.githubusercontent.com/f5AFfMhv/Random-Scripts/master/pve_backup_verify.sh
     name: pve_backup_verify.sh

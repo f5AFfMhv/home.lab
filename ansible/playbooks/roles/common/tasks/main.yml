@@ -41,9 +41,11 @@
     group: root
     mode: "0770"
   with_items: "{{ resources }}"
+  when: resources is defined
 
 - name: Install downloaded packages
   ansible.builtin.command:
     cmd: dpkg -i /root/{{ item.name }}
   with_items: "{{ resources }}"
+  when: resources is defined
   changed_when: true
