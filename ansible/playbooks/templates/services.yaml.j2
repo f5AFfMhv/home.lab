@@ -55,15 +55,10 @@
           url: https://pc.home.lab:9443
           env: 6
           key: {{ portainer_key }}
-    - SRV:
-        href: https://srv.home.lab:8006/
-        icon: proxmox.png
-        ping: 192.168.1.12
-#        widget:
-#          type: proxmox
-#          url: https://srv.home.lab:8006
-#          username: homepage@pam!homepage
-#          password: {{ proxmox_key }}
+    - Docker Server:
+        href: https://docker.home.lab:9090/
+        icon: docker.png
+        ping: 192.168.1.13
     - Raspberry Pi:
         href: https://pihole.home.lab:9090/
         icon: raspberrypi.png

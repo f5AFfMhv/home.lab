@@ -1,10 +1,12 @@
 ---
-user: debian
+user: mj
+
+dns_server: 192.168.1.40
 
 gpg_keys:
-  - https://download.docker.com/linux/debian/gpg
+  - "https://download.docker.com/linux/{{ 'debian' if ansible_distribution == 'Debian' else 'ubuntu' }}/gpg"
 apt_repositories:
-  - "deb [arch={{ 'arm64' if ansible_architecture == 'aarch64' else 'amd64' }}] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable"
+  - "deb [arch={{ 'arm64' if ansible_architecture == 'aarch64' else 'amd64' }}] https://download.docker.com/linux/{{ 'debian' if ansible_distribution == 'Debian' else 'ubuntu' }} {{ ansible_distribution_release }} stable"
 
 packages:
   - vim
@@ -22,8 +24,15 @@ packages:
   - python3-dev
   - python3-setuptools
   - python3-pip
-  - thefuck
   - nfs-common
   - lm-sensors
+  - network-manager
+  - cockpit
+  - cockpit-networkmanager
+  - cockpit-packagekit
+  - cockpit-podman
+  - cockpit-storaged
+  - cockpit-system
+  - cockpit-ws
 
 registry_hostname: docker.pve.home.lab

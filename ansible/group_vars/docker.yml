@@ -6,8 +6,8 @@ external_network: caddy-network
 
 # Prometheus exporters configuration
 prometheus_job:
-  - target: mqtt2prometheus
-    port: 9641
+  # - target: mqtt2prometheus
+  #   port: 9641
   - target: sonarr-exporter
     port: 9707
   - target: radarr-exporter
@@ -20,14 +20,14 @@ prometheus_job:
     port: 9100
   - target: pc.home.lab
     port: 9100
-  - target: pve.home.lab
-    port: 9100
-  - target: srv.home.lab
-    port: 9100
+  # - target: pve.home.lab
+  #   port: 9100
+  # - target: srv.home.lab
+  #   port: 9100
 
 # List of compose files to run from git repository
 compose_files:
-  - portainer-agent.yaml
+  # - portainer-agent.yaml
   - caddy.yaml
   - filebrowser.yaml
   - libre_speedtest.yaml
@@ -39,8 +39,8 @@ compose_files:
   - vaultwarden.yaml
   - youtube.yaml
   - watchtower.yaml
-  - moon_server.yaml
-  - mqtt.yaml
+  # - moon_server.yaml
+  # - mqtt.yaml
   - grafana.yaml
   - syncthing.yaml
   - gitea.yaml

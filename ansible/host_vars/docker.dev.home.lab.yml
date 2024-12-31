@@ -1,0 +1,21 @@
+---
+external_domain: home.lab
+data_dir: /mnt/data
+
+# Homepage widget secrets
+portainer_key: xxx
+proxmox_key: xxx
+pihole_key: xxx
+deluge_password: xxx
+weatherapi_key: xxx
+openweathermap_key: xxx
+sonarr_key: xxx
+
+# Crontab environment variables
+cron_env:
+  - var: HC_DOCKER_PING
+    val: 0f2ea9d5-61df-42f7-9587-a4534f12643a
+
+resources:
+  - name: powerpanel.deb
+    url: https://dl4jz3rbrsfum.cloudfront.net/software/PPL_64bit_v1.4.1.deb

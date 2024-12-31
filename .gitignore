@@ -7,3 +7,4 @@ ansible/playbooks/templates/pve.yml.j2
 ansible/host_vars/docker.home.lab.yml
 ansible/host_vars/srv.home.lab.yml
 tmp.yaml
+rsync.txt
