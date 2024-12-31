@@ -2,16 +2,24 @@
 # For configuration options and examples, please see:
 # https://gethomepage.dev/latest/configs/service-widgets
 
+- logo:
+    icon: https://www.onlygfx.com/wp-content/uploads/2016/08/flag-of-lithuania.png
+
 - search:
     provider: duckduckgo
 
 - resources:
+    expanded: true
     cpu: true
     memory: true
-    disk: /
-    cputemp: false
+    disk:
+      - /
+      - /data
+    cputemp: true
     uptime: true
+    network: true
     units: metric
+
 
 - datetime:
     format:
