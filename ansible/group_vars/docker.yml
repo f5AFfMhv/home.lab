@@ -27,6 +27,7 @@ prometheus_job:
 
 # List of compose files to run from git repository
 compose_files:
+  - portainer.yaml
   # - portainer-agent.yaml
   - caddy.yaml
   - filebrowser.yaml

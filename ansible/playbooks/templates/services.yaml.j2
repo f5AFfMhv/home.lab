@@ -47,13 +47,13 @@
 
 - Server:
     - Portainer:
-        href: "https://pc.home.lab:9443/#!/auth"
+        href: "https://docker.home.lab:9443/#!/auth"
         icon: portainer.png
-        ping: 192.168.1.2
+        ping: 192.168.1.13
         widget:
           type: portainer
-          url: https://pc.home.lab:9443
-          env: 6
+          url: https://docker.home.lab:9443
+          env: 2
           key: {{ portainer_key }}
     - Docker Server:
         href: https://docker.home.lab:9090/
