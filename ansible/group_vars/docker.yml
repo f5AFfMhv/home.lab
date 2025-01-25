@@ -49,6 +49,7 @@ compose_files:
   - photoview.yaml
   - homepage.yaml
   - cloudflared.yaml
+  - memos.yaml
 
 # Service port map for external caddy network
 services:
@@ -96,6 +97,8 @@ services:
     port: 80
   - name: homepage
     port: 3000
+  - name: memos
+    port: 5230
 
 cron_jobs:
   - name: Send ping to healthchecks server
