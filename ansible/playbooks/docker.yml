@@ -150,10 +150,8 @@
       tags: docker
 
     - name: Run docker-compose up
-      community.docker.docker_compose:
+      community.docker.docker_compose_v2:
         project_src: "{{ compose_dir }}/docker-compose-files"
-        build: true
-        env_file: "{{ compose_dir }}/docker-compose-files/.env"
         files: "{{ compose_files }}"
         remove_orphans: true
       register: output
