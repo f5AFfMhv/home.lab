@@ -35,7 +35,7 @@ compose_files:
   - arr_stack.yaml
   - audiobookshelf.yaml
   - jellyfin.yaml
-  - kavita.yaml
+  # - kavita.yaml
   - torrent.yaml
   - vaultwarden.yaml
   - youtube.yaml
@@ -46,10 +46,11 @@ compose_files:
   - syncthing.yaml
   - gitea.yaml
   - prometheus.yaml
-  - photoview.yaml
+  # - photoview.yaml
   - homepage.yaml
   - cloudflared.yaml
   - memos.yaml
+  - nextcloud.yaml
 
 # Service port map for external caddy network
 services:
@@ -99,6 +100,8 @@ services:
     port: 3000
   - name: memos
     port: 5230
+  - name: nextcloud
+    port: 80
 
 cron_jobs:
   - name: Send ping to healthchecks server
