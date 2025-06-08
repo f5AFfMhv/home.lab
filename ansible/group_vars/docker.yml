@@ -38,7 +38,7 @@ compose_files:
   # - kavita.yaml
   - torrent.yaml
   - vaultwarden.yaml
-  - youtube.yaml
+  - tubesync.yaml
   - watchtower.yaml
   # - moon_server.yaml
   # - mqtt.yaml
