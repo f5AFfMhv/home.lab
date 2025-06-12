@@ -160,7 +160,6 @@
     - name: Change config dir owner
       ansible.builtin.file:
         path: "{{ config_dir }}"
-        owner: "{{ user }}"
         group: "{{ user }}"
         recurse: true
       tags: docker
