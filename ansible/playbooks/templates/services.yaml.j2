@@ -19,7 +19,7 @@
                 params:
                   unmonitored: false
 
-- Media:
+- Services:
     - Memos:
         href: https://memos.home.lab/
         icon: memos.png
@@ -28,18 +28,14 @@
         href: https://audiobookshelf.home.lab/
         icon: audiobookshelf.png
         siteMonitor: https://audiobookshelf.home.lab/
-    - Filebrowser:
-        href: https://filebrowser.home.lab/
-        icon: filebrowser.png
-        siteMonitor: https://filebrowser.home.lab/
+    - Jellyfin:
+        href: https://jellyfin.home.lab/
+        icon: jellyfin.png
+        siteMonitor: https://jellyfin.home.lab/
     - Nextcloud:
         href: https://nextcloud.home.lab/
         icon: nextcloud.png
         siteMonitor: https://nextcloud.home.lab/
-    - Vaultwarden:
-        href: https://vaultwarden.home.lab/
-        icon: vaultwarden.png
-        siteMonitor: https://vaultwarden.home.lab/
 
 - Server:
     - Portainer:
@@ -47,10 +43,10 @@
         icon: portainer.png
         ping: 192.168.1.13
         widget:
-          type: portainer
-          url: https://docker.home.lab:9443
-          env: 2
-          key: {{ portainer_key }}
+            type: portainer
+            url: https://docker.home.lab:9443
+            env: 2
+            key: {{ portainer_key }}
     - Docker Server:
         href: https://docker.home.lab:9090/
         icon: docker.png
@@ -59,14 +55,37 @@
         href: https://pihole.home.lab:9090/
         icon: raspberry-pi.png
         ping: 192.168.1.40
+    - EmonESP:
+        href: http://192.168.1.242/
+        icon: lnbits.png
+        ping: 192.168.1.242
+    - Grafana:
+        href: https://grafana.home.lab/
+        icon: grafana.png
+        siteMonitor: https://grafana.home.lab/
+    - Filebrowser:
+        href: https://filebrowser.home.lab/
+        icon: filebrowser.png
+        siteMonitor: https://filebrowser.home.lab
+
+- Network:
     - 5G Gateway:
-        href: http://192.168.2.1
-        icon: mdi-wan
-        ping: 192.168.2.1
+            href: http://192.168.2.1
+            icon: mdi-wan
+            ping: 192.168.2.1
     - Router:
-        href: https://192.168.1.1/
-        icon: mdi-lan
-        ping: 192.168.1.1
+            href: https://192.168.1.1/
+            icon: mdi-lan
+            ping: 192.168.1.1
+    - Librespeed:
+            href: http://docker.home.lab:9008/
+            icon: librespeed.png
+            siteMonitor: http://docker.home.lab:9008/
+    - PiHole:
+            href: http://pihole.home.lab/admin
+            icon: pi-hole.png
+            ping: 192.168.1.40
+            siteMonitor: http://pihole.home.lab/admin
 
 - Arr Stack:
     - Sonarr:
@@ -89,29 +108,6 @@
         href: https://jellyseerr.home.lab/
         icon: jellyseerr.png
         siteMonitor: https://jellyseerr.home.lab/
-    - Jellyfin:
-        href: https://jellyfin.home.lab/
-        icon: jellyfin.png
-        siteMonitor: https://jellyfin.home.lab/
-
-- Monitoring:
-    - PiHole:
-        href: http://pihole.home.lab/admin
-        icon: pi-hole.png
-        ping: 192.168.1.40
-        siteMonitor: http://pihole.home.lab/admin
-    - Grafana:
-        href: https://grafana.home.lab/
-        icon: grafana.png
-        siteMonitor: https://grafana.home.lab/
-    - Librespeed:
-        href: http://docker.home.lab:9008/
-        icon: librespeed.png
-        siteMonitor: http://docker.home.lab:9008/
-    - EmonESP:
-        href: http://192.168.1.242/
-        icon: lnbits.png
-        ping: 192.168.1.242
 
 - Download:
     - Deluge:

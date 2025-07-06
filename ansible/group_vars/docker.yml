@@ -6,8 +6,8 @@ external_network: caddy-network
 
 # Prometheus exporters configuration
 prometheus_job:
-  # - target: mqtt2prometheus
-  #   port: 9641
+  - target: mqtt2prometheus
+    port: 9641
   - target: sonarr-exporter
     port: 9707
   - target: radarr-exporter
@@ -36,7 +36,6 @@ compose_files:
   - audiobookshelf.yaml
   - jellyfin.yaml
   - torrent.yaml
-  - vaultwarden.yaml
   - tubesync.yaml
   - watchtower.yaml
   - grafana.yaml
@@ -47,6 +46,7 @@ compose_files:
   - cloudflared.yaml
   - memos.yaml
   - nextcloud.yaml
+  - mqtt.yaml
 
 # Service port map for external caddy network
 services:
