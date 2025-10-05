@@ -98,6 +98,8 @@ services:
     port: 5230
   - name: nextcloud
     port: 80
+  - name: lidarr
+    port: 8686
 
 cron_jobs:
   - name: Send ping to healthchecks server
