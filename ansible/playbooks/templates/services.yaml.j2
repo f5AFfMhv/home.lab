@@ -28,10 +28,10 @@
         href: https://audiobookshelf.home.lab/
         icon: audiobookshelf.png
         siteMonitor: https://audiobookshelf.home.lab/
-    - Jellyfin:
-        href: https://jellyfin.home.lab/
-        icon: jellyfin.png
-        siteMonitor: https://jellyfin.home.lab/
+    - HomeAssistant:
+        href: http://ha.home.lab:8123
+        icon: home-assistant.png
+        siteMonitor: http://ha.home.lab:8123
     - Nextcloud:
         href: https://nextcloud.home.lab/
         icon: nextcloud.png
@@ -87,15 +87,15 @@
             ping: 192.168.1.40
             siteMonitor: http://pihole.home.lab/admin
 
-- Arr Stack:
+- Media:
     - Sonarr:
         href: https://sonarr.home.lab/
         icon: sonarr.png
         siteMonitor: https://sonarr.home.lab/
-        widget:
-            type: sonarr
-            url: http://sonarr:8989
-            key: {{ sonarr_key }}
+    #    widget:
+    #        type: sonarr
+    #        url: http://sonarr:8989
+    #        key: {{ sonarr_key }}
     - Radarr:
         href: https://radarr.home.lab/
         icon: radarr.png
@@ -112,6 +112,10 @@
         href: https://jellyseerr.home.lab/
         icon: jellyseerr.png
         siteMonitor: https://jellyseerr.home.lab/
+    - Jellyfin:
+        href: https://jellyfin.home.lab/
+        icon: jellyfin.png
+        siteMonitor: https://jellyfin.home.lab/
 
 - Download:
     - Deluge:

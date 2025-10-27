@@ -25,7 +25,7 @@ prometheus_job:
   # - target: srv.home.lab
   #   port: 9100
 
-# List of compose files to run from git repository
+  # List of compose files to run from git repository
 compose_files:
   - portainer.yaml
   # - portainer-agent.yaml
@@ -47,6 +47,7 @@ compose_files:
   - memos.yaml
   - nextcloud.yaml
   - mqtt.yaml
+  - homeassistant.yaml
 
 # Service port map for external caddy network
 services:
