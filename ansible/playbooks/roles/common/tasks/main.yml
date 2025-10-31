@@ -1,5 +1,8 @@
 ---
 # tasks file for common
+- name: Gather service facts
+  ansible.builtin.service_facts:
+
 - name: Install gpg
   ansible.builtin.apt:
     name: gnupg2
@@ -56,21 +59,25 @@
     dest: /usr/bin/bat
     state: link
 
-- name: Start cockpit service
-  ansible.builtin.service:
-    name: cockpit.socket
-    state: started
-    enabled: true
+- name: Update glances.service
+  ansible.builtin.lineinfile:
+    path: /usr/lib/systemd/system/glances.service
+    regexp: '^ExecStart='
+    line: 'ExecStart=/usr/bin/glances -w -B 0.0.0.0'
+    backup: true
+  notify: Reload systemd daemon
 
 - name: Configure DNS servers for systemd-resolved
-  ansible.builtin.blockinfile:
+  ansible.builtin.lineinfile:
     path: /etc/systemd/resolved.conf
-    block: |
-      DNS={{ dns_server }}
-      FallbackDNS=1.1.1.1
+    regexp: '^DNS='
+    line: DNS={{ dns_server }}
     state: present
+  when: ansible_facts['services']['systemd-resolved.service'] is defined
+  notify: Restart systemd-resolved
 
-- name: Restart systemd-resolved
+- name: Restart and enable services
   ansible.builtin.service:
-    name: systemd-resolved
+    name: "{{ services }}"
     state: restarted
+    enabled: true
