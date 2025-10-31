@@ -28,6 +28,7 @@ packages:
   - nfs-common
   - lm-sensors
   - network-manager
+  - glances
   - cockpit
   - cockpit-networkmanager
   - cockpit-packagekit
@@ -35,5 +36,9 @@ packages:
   - cockpit-storaged
   - cockpit-system
   - cockpit-ws
+
+services:
+  - cockpit.socket
+  - glances
 
 registry_hostname: docker.pve.home.lab

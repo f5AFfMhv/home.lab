@@ -1,0 +1,9 @@
+- name: Reload systemd daemon
+  ansible.builtin.systemd:
+    daemon_reload: true
+  notify: Restart and enable services
+
+- name: Restart systemd-resolved
+  ansible.builtin.service:
+    name: systemd-resolved
+    state: restarted
