@@ -2,23 +2,6 @@
 # For configuration options and examples, please see:
 # https://gethomepage.dev/latest/configs/services
 
-- Calendar:
-    - Calendar:
-        widget:
-          type: calendar
-          firstDayInWeek: monday
-          view: monthly
-          maxEvents: 10
-          showTime: true
-          timezone: Europe/Vilnius
-          integrations:
-              - type: sonarr
-                service_group: Arr Stack
-                service_name: Sonarr
-                color: teal
-                params:
-                  unmonitored: false
-
 - Services:
     - Memos:
         href: https://memos.home.lab/
@@ -36,6 +19,10 @@
         href: https://nextcloud.home.lab/
         icon: nextcloud.png
         siteMonitor: https://nextcloud.home.lab/
+    - Wealthfolio:
+        href: https://wealthfolio.home.lab/
+        icon: sh-wealthfolio.png
+        siteMonitor: https://wealthfolio.home.lab/
 
 - Server:
     - Portainer:

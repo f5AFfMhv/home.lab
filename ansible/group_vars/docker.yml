@@ -6,20 +6,20 @@ external_network: caddy-network
 
 # Prometheus exporters configuration
 prometheus_job:
-  - target: mqtt2prometheus
-    port: 9641
-  - target: sonarr-exporter
-    port: 9707
-  - target: radarr-exporter
-    port: 9708
-  - target: pihole-exporter
-    port: 9617
-  - target: speedtest-exporter
-    port: 9798
   - target: node-exporter
     port: 9100
-  - target: pc.home.lab
-    port: 9100
+  - target: mqtt2prometheus
+    port: 9641
+  # - target: sonarr-exporter
+  #   port: 9707
+  # - target: radarr-exporter
+  #   port: 9708
+  # - target: pihole-exporter
+  #   port: 9617
+  # - target: speedtest-exporter
+  #   port: 9798
+  # - target: pc.home.lab
+  #   port: 9100
   # - target: pve.home.lab
   #   port: 9100
   # - target: srv.home.lab
@@ -48,6 +48,7 @@ compose_files:
   - nextcloud.yaml
   - mqtt.yaml
   - homeassistant.yaml
+  - wealthfolio.yaml
 
 # Service port map for external caddy network
 services:
@@ -101,6 +102,8 @@ services:
     port: 80
   - name: lidarr
     port: 8686
+  - name: wealthfolio
+    port: 8088
 
 cron_jobs:
   - name: Send ping to healthchecks server
