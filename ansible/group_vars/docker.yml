@@ -49,6 +49,7 @@ compose_files:
   - mqtt.yaml
   - homeassistant.yaml
   - wealthfolio.yaml
+  - linkding.yaml
 
 # Service port map for external caddy network
 services:
@@ -104,6 +105,8 @@ services:
     port: 8686
   - name: wealthfolio
     port: 8088
+  - name: linkding
+    port: 9090
 
 cron_jobs:
   - name: Send ping to healthchecks server
