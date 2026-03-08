@@ -37,7 +37,6 @@ compose_files:
   - jellyfin.yaml
   - torrent.yaml
   - tubesync.yaml
-  - watchtower.yaml
   - grafana.yaml
   - syncthing.yaml
   - gitea.yaml
