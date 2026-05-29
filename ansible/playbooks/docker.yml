@@ -104,23 +104,23 @@
         - docker
         - homepage
 
-    - name: Create prometheus configuration
-      ansible.builtin.template:
-        src: prometheus.yml.j2
-        dest: "{{ config_dir }}/prometheus/config/prometheus.yml"
-        owner: "{{ user }}"
-        group: "{{ user }}"
-        mode: "0664"
-      tags: docker
+    # - name: Create prometheus configuration
+    #   ansible.builtin.template:
+    #     src: prometheus.yml.j2
+    #     dest: "{{ config_dir }}/prometheus/config/prometheus.yml"
+    #     owner: "{{ user }}"
+    #     group: "{{ user }}"
+    #     mode: "0664"
+    #   tags: docker
 
-    - name: Copy mqtt2prometheus configuration
-      ansible.builtin.copy:
-        src: prometheus2mqtt_config.yaml
-        dest: "{{ config_dir }}/mqtt2prometheus/prometheus2mqtt_config.yaml"
-        owner: "{{ user }}"
-        group: "{{ user }}"
-        mode: "0664"
-      tags: docker
+    # - name: Copy mqtt2prometheus configuration
+    #   ansible.builtin.copy:
+    #     src: prometheus2mqtt_config.yaml
+    #     dest: "{{ config_dir }}/mqtt2prometheus/prometheus2mqtt_config.yaml"
+    #     owner: "{{ user }}"
+    #     group: "{{ user }}"
+    #     mode: "0664"
+    #   tags: docker
 
     - name: Clone Git repository
       ansible.builtin.git:
