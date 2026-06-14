@@ -46,6 +46,7 @@ compose_files:
   - homeassistant.yaml
   - wealthfolio.yaml
   - linkding.yaml
+  - bambuddy.yaml
 
 # Service port map for external caddy network
 services:
@@ -103,6 +104,8 @@ services:
     port: 8088
   - name: linkding
     port: 9090
+  - name: bambuddy
+    port: 8000
 
 cron_jobs:
   - name: Send ping to healthchecks server
