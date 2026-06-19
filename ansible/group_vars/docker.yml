@@ -47,6 +47,7 @@ compose_files:
   - wealthfolio.yaml
   - linkding.yaml
   - bambuddy.yaml
+  - my-lathe.yaml
 
 # Service port map for external caddy network
 services:
@@ -106,6 +107,8 @@ services:
     port: 9090
   - name: bambuddy
     port: 8000
+  - name: my-lathe
+    port: 4243
 
 cron_jobs:
   - name: Send ping to healthchecks server
