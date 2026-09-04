@@ -6,8 +6,8 @@ external_network: caddy-network
 
 # Prometheus exporters configuration
 prometheus_job:
-  - target: node-exporter
-    port: 9100
+  # - target: node-exporter
+  #   port: 9100
   - target: mqtt2prometheus
     port: 9641
   # - target: sonarr-exporter
@@ -49,6 +49,9 @@ compose_files:
   - bambuddy.yaml
   - my-lathe.yaml
   - collabora.yaml
+  - prometheus.yaml
+  - grafana.yaml
+  - mqtt.yaml
 
 # Service port map for external caddy network
 services:
