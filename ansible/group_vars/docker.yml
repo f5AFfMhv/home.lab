@@ -49,8 +49,6 @@ compose_files:
   - bambuddy.yaml
   - my-lathe.yaml
   - collabora.yaml
-  - prometheus.yaml
-  - grafana.yaml
   - mqtt.yaml
 
 # Service port map for external caddy network
