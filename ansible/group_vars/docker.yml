@@ -64,7 +64,7 @@ services:
   - name: audiobookshelf
     port: 80
   - name: filebrowser
-    port: 8080
+    port: 80
   - name: freshrss
     port: 80
   - name: gitea
