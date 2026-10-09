@@ -50,6 +50,7 @@ compose_files:
   - my-lathe.yaml
   - collabora.yaml
   - mqtt.yaml
+  - speedtest-tracker.yaml
 
 # Service port map for external caddy network
 services:
