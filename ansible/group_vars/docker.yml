@@ -30,8 +30,6 @@ compose_files:
   - portainer.yaml
   # - portainer-agent.yaml
   - caddy.yaml
-  - filebrowser.yaml
-  - libre_speedtest.yaml
   - arr_stack.yaml
   - audiobookshelf.yaml
   - jellyfin.yaml
@@ -46,8 +44,6 @@ compose_files:
   - homeassistant.yaml
   - wealthfolio.yaml
   - linkding.yaml
-  - bambuddy.yaml
-  - my-lathe.yaml
   - collabora.yaml
   - mqtt.yaml
   - speedtest-tracker.yaml
