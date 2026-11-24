@@ -47,6 +47,7 @@ compose_files:
   - collabora.yaml
   - mqtt.yaml
   - speedtest-tracker.yaml
+  - maklefolio.yaml
 
 # Service port map for external caddy network
 services:
@@ -108,6 +109,8 @@ services:
     port: 8000
   - name: my-lathe
     port: 4243
+  - name: maklefolio
+    port: 5000
 
 cron_jobs:
   - name: Send ping to healthchecks server
