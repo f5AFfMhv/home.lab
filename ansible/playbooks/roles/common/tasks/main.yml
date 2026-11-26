@@ -3,20 +3,28 @@
 - name: Gather service facts
   ansible.builtin.service_facts:
 
-- name: Install gpg
+- name: Install gpg and deb822_repository requirements
   ansible.builtin.apt:
-    name: gnupg2
+    name:
+      - gnupg2
+      - python3-debian
     state: present
 
-- name: Add an Apt signing keys
-  ansible.builtin.apt_key:
-    url: "{{ item }}"
-    state: present
-  with_items: "{{ gpg_keys }}"
+- name: Remove legacy one-line repository files
+  ansible.builtin.file:
+    path: "/etc/apt/sources.list.d/{{ item }}"
+    state: absent
+  with_items: "{{ apt_legacy_sources }}"
 
-- name: Add repositories into sources list
-  ansible.builtin.apt_repository:
-    repo: "{{ item }}"
+- name: Add apt repositories
+  ansible.builtin.deb822_repository:
+    name: "{{ item.name }}"
+    types: deb
+    uris: "{{ item.uris }}"
+    suites: "{{ item.suites }}"
+    components: "{{ item.components }}"
+    architectures: "{{ item.architectures | default(omit) }}"
+    signed_by: "{{ item.signed_by | default(omit) }}"
     state: present
   with_items: "{{ apt_repositories }}"
 

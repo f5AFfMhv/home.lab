@@ -5,3 +5,16 @@
   roles:
     - common
   tasks:
+    - name: Create nightly update and reboot cron job
+      ansible.builtin.cron:
+        name: Update apt packages, Pi-hole and reboot
+        user: root
+        minute: "0"
+        hour: "4"
+        job: >-
+          { /usr/bin/apt-get update &&
+          DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get -y
+          -o Dpkg::Options::=--force-confdef -o Dpkg::Options::=--force-confold dist-upgrade;
+          /usr/local/bin/pihole -up;
+          /sbin/shutdown -r now; } >> /var/log/nightly-update.log 2>&1
+      tags: cron

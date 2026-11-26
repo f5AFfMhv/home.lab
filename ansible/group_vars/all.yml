@@ -3,10 +3,17 @@ user: mj
 
 dns_server: 192.168.1.40
 
-gpg_keys:
-  - "https://download.docker.com/linux/{{ 'debian' if ansible_distribution == 'Debian' else 'ubuntu' }}/gpg"
 apt_repositories:
-  - "deb [arch={{ 'arm64' if ansible_architecture == 'aarch64' else 'amd64' }}] https://download.docker.com/linux/{{ 'debian' if ansible_distribution == 'Debian' else 'ubuntu' }} {{ ansible_distribution_release }} stable"
+  - name: docker
+    uris: "https://download.docker.com/linux/{{ 'debian' if ansible_distribution == 'Debian' else 'ubuntu' }}"
+    suites: "{{ ansible_distribution_release }}"
+    components: stable
+    architectures: "{{ 'arm64' if ansible_architecture == 'aarch64' else 'amd64' }}"
+    signed_by: "https://download.docker.com/linux/{{ 'debian' if ansible_distribution == 'Debian' else 'ubuntu' }}/gpg"
+# Files created by the old apt_repository task; removed so they don't conflict with the deb822 sources
+apt_legacy_sources:
+  - download_docker_com_linux_debian.list
+  - download_docker_com_linux_ubuntu.list
 
 packages:
   - vim

@@ -121,3 +121,11 @@ cron_jobs:
     job: "/usr/bin/docker image prune -a -f"
     minute: "0"
     hour: "12"
+  - name: Update apt packages and reboot
+    job: >-
+      { /usr/bin/apt-get update &&
+      DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get -y
+      -o Dpkg::Options::=--force-confdef -o Dpkg::Options::=--force-confold dist-upgrade;
+      /sbin/shutdown -r now; } >> /var/log/nightly-update.log 2>&1
+    minute: "0"
+    hour: "3"
